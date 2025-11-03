@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        Cazar pokemon
+    </title>
+
+    <link rel="stylesheet" href="assets/styles/index.css">
+
+</head>
+
+<body>
+
+    <div class="sync_container">
+
+        <h2>Busqueda pokemon</h2>
+
+        <input type="text" id="poke_input">
+
+        <button onclick="getPokeData()">
+            Consultar información
+        </button>
+
+        <div class="todo_list" id="poke_data">
+
+        </div>
+        <h1 id="poke_name"> </h1>
+        <p id="error_mensage"></p>
+
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

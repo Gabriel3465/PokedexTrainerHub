@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI';
+}
+
+body {
+    background: #1a2a6c;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    color: #ffde00;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: #446cb7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#fecha{
+    text-align: center;
+}
+
+/* pagia de busqueda pokemon */
+.sync_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+/* Contenedor donde se muestra la imagen */
+#poke_data {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 150px;
+}
+
+/* Imagen del Pokémon */
+#poke_data img {
+    width: 150px;
+    height: auto;
+}
+
+/* Nombre del Pokémon */
+#poke_name {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Mensaje de error */
+#error_mensage {
+    color: red;
+    font-weight: bold;
+}

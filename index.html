@@ -8,7 +8,7 @@
         Poke
     </title>
 
-    <!-- <link rel="stylesheet" href="assets/styles/index.css"> -->
+    <link rel="stylesheet" href="assets/styles/index.css">
 </head>
 
 <body>
@@ -17,27 +17,37 @@
         Pokédex Trainer Hub
     </h1>
 
-    <form>
+    <br><br>
+
+    <form onsubmit="return saveTrainer()">
         <div class="form container">
 
             <div class="input_group">
 
-                <input type="text" id="Name" placeholder="Nombre">
+                <input type="text" id="Name" placeholder="Nombre" minlength="3" maxlength="50"
+                    onkeypress="return onlyLetters(event)" required>
 
                 <br><br>
-                <input type="text" name="" id="Email" placeholder="Correo">
 
+                <input type="text" id="email" placeholder="Correo" onkeyup="validarEmailMensaje()" required>
+                <div id="mensaje"></div>
+
+                <br><br>
+
+                <label>Fecha de Inicio de Aventura:</label>
+                <div id="fecha"></div>
             </div>
 
-            <button type="submit" class="acces_button"> Acceder </button>
+            <br>
 
+            <button type="submit" class="acces_button"> Guardar </button>
 
         </div>
     </form>
 
+    <script src="assets/js/main.js"></script>
+
+
 </body>
-
-
-
 
 </html>

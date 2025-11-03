@@ -78,7 +78,7 @@ function getPokeData() {
             document.getElementById('error_mensage').innerHTML =
                 "No se encontró el Pokémon. Intenta de nuevo.";
         }
-    );
+        );
 
 }
 
@@ -86,17 +86,6 @@ function getPokeData() {
 function addToTeam(id, nombre, sprite) {
     let trainer = JSON.parse(localStorage.getItem("trainer"));
 
-    if (!trainer) {
-        alert("Primero registra un entrenador antes de añadir Pokémon.");
-        return;
-    }
-
-    // Si no existe el array 'equipo', se crea
-    if (!Array.isArray(trainer.equipo)) {
-        trainer.equipo = [];
-    }
-
-    // Verificar si ya existe ese Pokémon en el equipo
     const exists = trainer.equipo.some(poke => poke.id === id);
     if (exists) {
         alert(`${nombre} ya está en tu equipo.`);
@@ -108,14 +97,38 @@ function addToTeam(id, nombre, sprite) {
         id: id,
         nombre: nombre,
         sprite: sprite,
-        favorito: false
     });
 
-    // Guardar nuevamente en localStorage
     localStorage.setItem("trainer", JSON.stringify(trainer));
 
     alert(`${nombre.toUpperCase()} añadido a tu equipo.`);
 }
+
+//mostrar equipo
+function renderTeam() {
+    const container = document.getElementById("equipo_container");
+
+    let trainer = JSON.parse(localStorage.getItem("trainer"));
+    if (!trainer || !trainer.equipo) return;
+
+    let html = "<div class='team-grid'>";
+    trainer.equipo.forEach((poke, index) => {
+        html += `
+        <div class="pokemon-card">
+            <img src="${poke.sprite}" alt="${poke.nombre}">
+            <h3>${poke.nombre.toUpperCase()}</h3>
+        </div>`;
+    });
+    html += "</div>";
+
+    container.innerHTML = html;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("equipo_container")) {
+        renderTeam();
+    }
+});
 
 
 

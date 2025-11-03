@@ -88,7 +88,9 @@ function addToTeam(id, nombre, sprite) {
 
     const exists = trainer.equipo.some(poke => poke.id === id);
     if (exists) {
-        alert(`${nombre} ya está en tu equipo.`);
+        document.getElementById('error_mensage').innerHTML = `${nombre} ya está en tu equipo.`;
+        document.getElementById('error_mensage').style.color = 'red'
+
         return;
     }
 
@@ -97,11 +99,13 @@ function addToTeam(id, nombre, sprite) {
         id: id,
         nombre: nombre,
         sprite: sprite,
+        favorito: false
     });
 
     localStorage.setItem("trainer", JSON.stringify(trainer));
 
-    alert(`${nombre.toUpperCase()} añadido a tu equipo.`);
+    document.getElementById('error_mensage').innerHTML = `${nombre} se agrego correctamente`;
+    document.getElementById('error_mensage').style.color = 'green'
 }
 
 //mostrar equipo
@@ -114,23 +118,60 @@ function renderTeam() {
     let html = "<div class='team-grid'>";
     trainer.equipo.forEach((poke, index) => {
         html += `
-        <div class="pokemon-card">
-            <img src="${poke.sprite}" alt="${poke.nombre}">
-            <h3>${poke.nombre.toUpperCase()}</h3>
-        </div>`;
+            <div class="pokemon-card">
+                <img src="${poke.sprite}" alt="${poke.nombre}">
+                <h3>${poke.nombre.toUpperCase()}</h3>
+
+                <label>
+                    <input 
+                        type="checkbox"
+                        ${poke.favorito ? "checked" : ""}
+                        onchange="favorite(${poke.id}, this.checked)"
+                    >
+                    Favorito
+                </label>
+
+                <button onclick="deletePokemon(${poke.id})">Liberar</button>
+
+            </div>`;
     });
     html += "</div>";
 
     container.innerHTML = html;
 }
 
+//carga los pokemones
 document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("equipo_container")) {
         renderTeam();
     }
 });
 
+//elimina pokemones
+function deletePokemon(pokeId) {
+    let trainer = JSON.parse(localStorage.getItem("trainer"));
 
+    const index = trainer.equipo.findIndex(p => p.id === pokeId);
 
+    if (index !== -1) {
+        trainer.equipo.splice(index, 1);
+    }
 
+    localStorage.setItem("trainer", JSON.stringify(trainer));
+
+    renderTeam();
+}
+
+//favorito
+function favorite(pokeId, isChecked) {
+    const trainer = JSON.parse(localStorage.getItem("trainer"));
+
+    const index = trainer.equipo.findIndex(p => p.id === pokeId);
+
+    if (index !== -1) {
+        trainer.equipo[index].favorito = isChecked;
+    }
+
+    localStorage.setItem("trainer", JSON.stringify(trainer));
+}
 
